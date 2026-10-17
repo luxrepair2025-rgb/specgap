@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://luxrepair2025-rgb.github.io/specgap/sitemap.xml
