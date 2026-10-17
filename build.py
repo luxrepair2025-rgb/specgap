@@ -104,14 +104,14 @@ EMPTY = f'''<div class="soon"><span class="eyebrow">Coming soon</span><h2>First 
 <div class="card teaser"><div class="tz" aria-hidden="true">&#9981;</div><span class="tag">Tank Test</span><h3>How far on one tank?</h3><p>Fill it up and drive until it's empty.</p></div>
 <div class="card teaser"><div class="tz" aria-hidden="true">&#9878;</div><span class="tag">Head to Head</span><h3>Is the price gap worth it?</h3><p>Two rivals on the same roads.</p></div>
 <div class="card teaser"><div class="tz" aria-hidden="true">&#128269;</div><span class="tag">Review</span><h3>Honest full reviews</h3><p>The cars people actually buy.</p></div>
-<div class="card teaser"><div class="tz" aria-hidden="true">&#127937;</div><span class="tag">Challenge</span><h3>Top Gear-style challenges</h3><p>Simple rules, a stopwatch and plenty of opinions.</p></div>
+<div class="card teaser"><div class="tz" aria-hidden="true">&#127937;</div><span class="tag">Challenge</span><h3>Real-world challenges</h3><p>Simple rules, a stopwatch and plenty of opinions.</p></div>
 </div></div>'''
-page("index.html","Spec Gap | Real-World Car Reviews & Top Gear-Style Tests",
- "Spec Gap reviews cars and runs real-world, Top Gear-style tests like how far you can go on one tank of gas. Know the difference before you buy.",
+page("index.html","Spec Gap | Real-World Car Reviews & Road Tests",
+ "Spec Gap reviews cars and runs real-world road tests, like how far you can go on one tank of gas. Know the difference before you buy.",
  f'''<section class="hero"><div class="wrap">
 <img class="logo" src="assets/img/logo.png" alt="Spec Gap logo: brake disc with red caliper, tagline Know the Difference" width="983" height="408" fetchpriority="high">
 <h1>Real-world car reviews and tests</h1>
-<p>Brochures give you numbers. We go out and check them. Spec Gap runs honest, Top Gear-style tests, like how far a car really goes on one tank, so you can see the gap between the spec sheet and the road.</p>
+<p>Brochures give you numbers. We go out and check them. Spec Gap runs honest real-world tests, like how far a car really goes on one tank, so you can see the gap between the spec sheet and the road.</p>
 <div class="cta"><a class="btn btn-red" href="videos.html">Watch the videos</a><a class="btn btn-ghost" href="{e(CHANNEL_URL)}" target="_blank" rel="noopener">YouTube channel</a></div>
 </div></section>
 {'' if not any(v.get('featured') for v in VIDEOS) else '''<section aria-labelledby="ft"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Featured tests</span><h2 id="ft">Put to the test</h2></div><a class="btn btn-ghost" href="tests.html">How we test</a></div>
@@ -121,7 +121,7 @@ page("index.html","Spec Gap | Real-World Car Reviews & Top Gear-Style Tests",
 <a class="card feature" href="videos.html?category=Tank%20Test" style="text-decoration:none"><div class="icon" aria-hidden="true">&#9981;</div><h3>Tank Tests</h3><p>One full tank, one fixed route, driven until it's empty. Real range compared with the claimed figure.</p></a>
 <a class="card feature" href="videos.html?category=Head%20to%20Head" style="text-decoration:none"><div class="icon" aria-hidden="true">&#9878;</div><h3>Head to Head</h3><p>Two rivals, the same roads and the same tests. Find out if the spec gap is worth the price gap.</p></a>
 <a class="card feature" href="videos.html?category=Review" style="text-decoration:none"><div class="icon" aria-hidden="true">&#128269;</div><h3>Reviews</h3><p>Honest, in-depth reviews of the cars people actually buy, looking at comfort, tech, space and running costs.</p></a>
-<a class="card feature" href="videos.html?category=Challenge" style="text-decoration:none"><div class="icon" aria-hidden="true">&#127937;</div><h3>Challenges</h3><p>Top Gear-style challenges with simple rules, a stopwatch and plenty of opinions.</p></a>
+<a class="card feature" href="videos.html?category=Challenge" style="text-decoration:none"><div class="icon" aria-hidden="true">&#127937;</div><h3>Challenges</h3><p>Hands-on driving challenges with simple rules, a stopwatch and plenty of opinions.</p></a>
 </div></div></section>
 <section aria-labelledby="lv"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Latest</span><h2 id="lv">Latest videos</h2></div><a class="btn btn-ghost" href="videos.html">All videos &rarr;</a></div>
 {'<div class="grid" id="latest-videos"></div>' if VIDEOS else '<div id="latest-videos">'+EMPTY+'</div>'}</div></section>
@@ -129,7 +129,7 @@ page("index.html","Spec Gap | Real-World Car Reviews & Top Gear-Style Tests",
 
 static_cards = EMPTY if not VIDEOS else "".join(f'''<article class="card video"><a href="https://www.youtube.com/watch?v={e(v['id'])}" target="_blank" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/{e(v['id'])}/hqdefault.jpg" alt="Thumbnail for {e(v['title'])}" loading="lazy" width="480" height="360"></div><div class="body"><h3>{e(v['title'])}</h3><p>{e(v['description'])}</p></div></a></article>''' for v in VIDEOS)
 page("videos.html","Videos | Car Reviews, Tank Tests & Challenges | Spec Gap",
- "Browse every Spec Gap video: car reviews, one-tank range tests, head-to-head comparisons and Top Gear-style challenges. Filter by category and watch on YouTube.",
+ "Browse every Spec Gap video: car reviews, one-tank range tests, head-to-head comparisons and real-world driving challenges. Filter by category and watch on YouTube.",
  head("Videos","All videos","Every review, tank test and challenge in one place. Choose a category, then click a thumbnail to watch on YouTube.")+
  f'''<section><div class="wrap"><div class="filters" id="filters"{' hidden' if not VIDEOS else ''} role="group" aria-label="Filter videos by category"></div>
 <p class="meta" id="count" aria-live="polite"></p>
@@ -137,13 +137,13 @@ page("videos.html","Videos | Car Reviews, Tank Tests & Challenges | Spec Gap",
  extra_ld=([] if not VIDEOS else [{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":i+1,"url":f"https://www.youtube.com/watch?v={v['id']}"} for i,v in enumerate(VIDEOS)]}]+[video_ld(v) for v in VIDEOS]))
 
 page("tests.html","Our Test Formats | How Spec Gap Tests Cars",
- "How Spec Gap tests cars: one-tank range runs, head-to-head comparisons, in-depth reviews and Top Gear-style challenges, with consistent methods you can trust.",
+ "How Spec Gap tests cars: one-tank range runs, head-to-head comparisons, in-depth reviews and real-world driving challenges, with consistent methods you can trust.",
  head("Tests","How we test","Same routes, same rules, honest results. Here's what goes into each Spec Gap format.")+
  '''<section><div class="wrap prose">
 <article class="card test"><div class="num">01</div><div><h2 style="margin-top:0">Tank Test</h2><p>We fill the tank to the first click, reset the trip computer and drive a mixed route at legal, realistic speeds until the car runs dry or reaches a safe stopping point. Then we compare the real range and economy with the manufacturer's claim.</p></div></article>
 <article class="card test"><div class="num">02</div><div><h2 style="margin-top:0">Head to Head</h2><p>Two rivals, same day, same roads. We compare performance, comfort, practicality, tech and value, then decide whether the spec gap is worth the price gap.</p></div></article>
 <article class="card test"><div class="num">03</div><div><h2 style="margin-top:0">Full Review</h2><p>A detailed look at one car covering how it drives, what it's like to live with, what it costs to run and who it's for. We give honest verdicts with no hype.</p></div></article>
-<article class="card test"><div class="num">04</div><div><h2 style="margin-top:0">Challenges</h2><p>Top Gear-style challenges with simple rules: cold starts, boot-space tests, budget builds and anything else worth arguing about. Entertaining, but still fair.</p></div></article>
+<article class="card test"><div class="num">04</div><div><h2 style="margin-top:0">Challenges</h2><p>Hands-on driving challenges with simple rules: cold starts, boot-space tests, budget builds and anything else worth arguing about. Entertaining, but still fair.</p></div></article>
 <h2>Our principles</h2><ul><li>Consistent routes and conditions wherever possible</li><li>We always state how a test was run</li><li>Safety and the law come first</li><li>We tell you when a car isn't loaned or sponsored, and when it is</li></ul>
 <p><a class="btn btn-red" href="videos.html">See the tests in action</a></p></div></section>''',"Tests")
 
@@ -177,6 +177,6 @@ page("contact.html","Contact Spec Gap | Test Ideas, Collaborations & Press",
 (ROOT/"site.webmanifest").write_text(json.dumps({"name":"Spec Gap","short_name":"Spec Gap","description":"Real-world car reviews and tests. Know the difference.",
   "start_url":"./","scope":"./","display":"standalone","background_color":"#0a0a0b","theme_color":"#0a0a0b",
   "icons":[{"src":"assets/img/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"assets/img/icon-512.png","sizes":"512x512","type":"image/png"}]},indent=2))
-(ROOT/"404.html").write_text((ROOT/"index.html").read_text().split("<main")[0].replace("<title>Spec Gap | Real-World Car Reviews &amp; Top Gear-Style Tests</title>","<title>Page not found | Spec Gap</title>").replace('content="index,follow"','content="noindex"').replace('<meta charset="utf-8">','<meta charset="utf-8">\n<base href="'+BASE_PATH+'">')+
+(ROOT/"404.html").write_text((ROOT/"index.html").read_text().split("<main")[0].replace("<title>Spec Gap | Real-World Car Reviews &amp; Road Tests</title>","<title>Page not found | Spec Gap</title>").replace('content="index,follow"','content="noindex"').replace('<meta charset="utf-8">','<meta charset="utf-8">\n<base href="'+BASE_PATH+'">')+
   '<main id="main"><section class="hero"><div class="wrap"><h1>404: we ran out of road</h1><p>That page doesn\'t exist.</p><a class="btn btn-red" href="index.html">Back home</a></div></section></main></body></html>')
 print("Built", len(VIDEOS), "videos")
